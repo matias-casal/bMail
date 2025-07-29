@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  font-size: 14px;
+  line-height: 1.5;
+  color: #202124;
+  background-color: #f8faf9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Tailwind-like utility classes */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-1 {
+  gap: 0.25rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
+}
+.pb-4 {
+  padding-bottom: 1rem;
+}
+.pl-4 {
+  padding-left: 1rem;
+}
+.pr-3 {
+  padding-right: 0.75rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.mr-\[56px\] {
+  margin-right: 56px;
+}
+
+.h-4 {
+  height: 1rem;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.h-8 {
+  height: 2rem;
+}
+.h-16 {
+  height: 4rem;
+}
+.h-\[32px\] {
+  height: 32px;
+}
+.h-\[40px\] {
+  height: 40px;
+}
+.h-\[48px\] {
+  height: 48px;
+}
+.h-\[56px\] {
+  height: 56px;
+}
+
+.w-5 {
+  width: 1.25rem;
+}
+.w-\[68px\] {
+  width: 68px;
+}
+.w-\[138px\] {
+  width: 138px;
+}
+.w-\[200px\] {
+  width: 200px;
+}
+.w-\[256px\] {
+  width: 256px;
+}
+.w-0 {
+  width: 0;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+.min-w-\[500px\] {
+  min-width: 500px;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+.flex-1 {
+  flex: 1;
+}
+.grow {
+  flex-grow: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  user-select: none;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+.bg-gray-50 {
+  background-color: oklch(.985 .002 247.839);
+}
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+.bg-\[rgb\(233\,238\,246\)\] {
+  background-color: rgb(233, 238, 246);
+}
+.bg-\[rgb\(248\,250\,253\)\] {
+  background-color: rgb(248, 250, 253);
+}
+.bg-\[rgb\(194\,231\,255\)\] {
+  background-color: rgb(194, 231, 255);
+}
+.bg-\[rgb\(211\,227\,253\)\] {
+  background-color: rgb(211, 227, 253);
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-base {
+  font-size: 1rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+}
+.text-gray-500 {
+  color: #6b7280;
+}
+.text-\[rgb\(32\,33\,36\)\] {
+  color: rgb(32, 33, 36);
+}
+
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.hover\:bg-\[oklch\(0\.928_0\.006_264\.531\)\]:hover {
+  background-color: #ebeef1;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6;
+}
+
+.hover\:shadow-md:hover {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.hover\:z-10:hover {
+  z-index: 10;
+}
+
+.text-yellow-400 {
+  color: #facc15;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* Custom styles */
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-sans {
+  font-family:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+}
+
+/* Email row alternating backgrounds */
+.email-row:nth-child(odd) {
+  background-color: #f9fafb;
+}
+
+.email-row:nth-child(even) {
+  background-color: white;
+}
+
+/* Thread message styles */
+.thread-message {
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+}
+
+.thread-message:hover {
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Avatar styles */
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 0.875rem;
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* Email thread separator */
+.email-separator {
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 1rem 0;
+  width: 100%;
+}
