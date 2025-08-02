@@ -370,3 +370,8 @@ button {
   margin: 1rem 0;
   width: 100%;
 }
+
+/* Search highlight */
+.bg-yellow-200 {
+  background-color: #fef08a;
+}

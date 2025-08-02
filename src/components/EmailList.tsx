@@ -4,12 +4,30 @@ import { Thread } from '../types';
 import { formatTime } from '../utils/time';
 
 export function EmailList() {
-  const { getThreads, currentFolder, selectThread, toggleThreadStar } = useEmails();
+  const { getThreads, currentFolder, selectThread, toggleThreadStar, searchTerm, setSearchTerm } = useEmails();
 
   // Get threads that should be visible in current folder
-  const threads = getThreads().filter((thread) => {
-    // const latestEmail = thread.emails[thread.emails.length - 1];
-
+  const allThreads = getThreads();
+  
+  // Filter by search term if present
+  const searchFilteredThreads = searchTerm.trim() 
+    ? allThreads.filter((thread) => {
+        const searchLower = searchTerm.toLowerCase();
+        
+        // Search in subject, snippet, and participant names
+        return (
+          thread.subject.toLowerCase().includes(searchLower) ||
+          thread.snippet.toLowerCase().includes(searchLower) ||
+          thread.emails.some((email) => 
+            email.from.name.toLowerCase().includes(searchLower) ||
+            email.from.email.toLowerCase().includes(searchLower) ||
+            email.to.some(to => to.toLowerCase().includes(searchLower))
+          )
+        );
+      })
+    : allThreads;
+    
+  const threads = searchFilteredThreads.filter((thread) => {
     switch (currentFolder) {
       case 'inbox':
         return thread.emails.some((e) => e.folder === 'inbox');
@@ -97,16 +115,49 @@ export function EmailList() {
     e.stopPropagation();
     toggleThreadStar(threadId);
   };
+  
+  // Helper function to highlight search term
+  const highlightText = (text: string): React.ReactNode => {
+    if (!searchTerm.trim()) return text;
+    
+    const escapedTerm = searchTerm.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedTerm})`, 'gi');
+    const parts = text.split(regex);
+    
+    return parts.map((part, index) => 
+      part.toLowerCase() === searchTerm.trim().toLowerCase() ? (
+        <span key={index} className="bg-yellow-200">{part}</span>
+      ) : (
+        part
+      )
+    );
+  };
 
   return (
     <div className="mr-[56px] mb-4 flex min-w-[500px] grow flex-col rounded-2xl bg-white">
-      <div className="flex h-[48px] items-center px-4">
-        {/* Header area - could add search/filters here */}
+      <div className="flex h-[48px] items-center px-4 gap-3">
+        <input
+          type="text"
+          placeholder="Search emails..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex-1 px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+        {searchTerm && (
+          <button
+            onClick={() => setSearchTerm('')}
+            className="text-gray-500 hover:text-gray-700 text-sm px-2"
+          >
+            Clear
+          </button>
+        )}
       </div>
 
       <div className="flex-1">
         {threads.length === 0 ? (
-          <div className="flex items-center justify-center p-8 text-gray-500 text-lg">Empty</div>
+          <div className="flex items-center justify-center p-8 text-gray-500 text-lg">
+            {searchTerm ? 'No results found' : 'Empty'}
+          </div>
         ) : (
           threads.map((thread) => {
             const latestEmail = thread.emails[thread.emails.length - 1];
@@ -134,15 +185,19 @@ export function EmailList() {
                 </button>
 
                 <div className="w-[200px] shrink-0 truncate">
-                  <span className={isUnread ? 'font-bold' : ''}>{formatParticipants(thread)}</span>
+                  <span className={isUnread ? 'font-bold' : ''}>
+                    {highlightText(formatParticipants(thread))}
+                  </span>
                   {thread.emails.length > 1 && (
                     <span className="ml-1 text-xs text-gray-500">({thread.emails.length})</span>
                   )}
                 </div>
 
                 <div className="w-0 flex-1 grow truncate text-sm">
-                  <span className={isUnread ? 'font-bold' : ''}>{latestEmail.subject}</span>
-                  <span className="text-gray-500"> - {latestEmail.snippet}</span>
+                  <span className={isUnread ? 'font-bold' : ''}>
+                    {highlightText(latestEmail.subject)}
+                  </span>
+                  <span className="text-gray-500"> - {highlightText(latestEmail.snippet)}</span>
                 </div>
 
                 <div className="shrink-0 text-xs text-gray-500">

@@ -37,7 +37,7 @@ BMail includes 9+ specific behavioral differences from standard email clients:
 8. **Close Thread When Unstarred in Starred View**: Auto-closes thread when unstarring in starred view
 9. **Star Propagation**: Starring any message in a thread stars the entire thread in inbox view
 
-## Installation
+## Installatio
 
 ```bash
 # Clone the repository

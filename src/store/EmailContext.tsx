@@ -7,6 +7,7 @@ interface EmailContextType {
   currentFolder: Folder;
   currentThread: Thread | null;
   selectedEmailId: string | null;
+  searchTerm: string;
 
   // Actions
   setCurrentFolder: (folder: Folder) => void;
@@ -19,7 +20,7 @@ interface EmailContextType {
   markAsSpam: (emailId: string) => void;
   markAsRead: (emailId: string) => void;
   closeThread: () => void;
-
+  setSearchTerm: (searchTerm: string) => void;
   // Computed values
   getThreads: () => Thread[];
   getFolderCount: (folder: Folder) => number;
@@ -34,6 +35,7 @@ export function EmailProvider({ children }: { children: ReactNode }) {
   const [currentFolder, setCurrentFolder] = useState<Folder>('inbox');
   const [currentThreadId, setCurrentThreadId] = useState<string | null>(null);
   const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   // const [isLoading, setIsLoading] = useState(true);
 
   const emailService = EmailService.getInstance();
@@ -318,6 +320,8 @@ export function EmailProvider({ children }: { children: ReactNode }) {
     ? getThreads().find((t) => t.id === currentThreadId) || null
     : null;
 
+
+
   return (
     <EmailContext.Provider
       value={{
@@ -325,8 +329,10 @@ export function EmailProvider({ children }: { children: ReactNode }) {
         currentFolder,
         currentThread,
         selectedEmailId,
+        searchTerm,
         setCurrentFolder,
         selectThread,
+        setSearchTerm,
         selectEmail: setSelectedEmailId,
         toggleStar,
         toggleThreadStar,

@@ -1,5 +1,10 @@
 import { Email, Thread, Folder } from '../types';
-import { ApiEmail, MoveEmailRequest, ToggleStarRequest, MarkAsReadRequest } from './types';
+import {
+  ApiEmail,
+  MoveEmailRequest,
+  ToggleStarRequest,
+  MarkAsReadRequest,
+} from './types';
 import { getInitialEmails } from './mockData';
 
 // Service layer for email operations
